@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.nguyenquangtuan.noteme.R;
 
+import org.w3c.dom.Text;
+
 public class Detail extends AppCompatActivity {
     long id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,9 @@ public class Detail extends AppCompatActivity {
         Note note = db.getNote(id);
         getSupportActionBar().setTitle(note.getTitle());
         TextView details = findViewById(R.id.noteDesc);
+        TextView tv_subject = findViewById(R.id.tv_subject);
         details.setText(note.getContent());
+        tv_subject.setText(note.getSubject());
         details.setMovementMethod(new ScrollingMovementMethod());
 
         FloatingActionButton fab = findViewById(R.id.fab);

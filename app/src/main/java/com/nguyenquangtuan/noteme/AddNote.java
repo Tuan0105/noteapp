@@ -9,19 +9,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.nguyenquangtuan.noteme.R;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddNote extends AppCompatActivity {
     Toolbar toolbar;
     EditText noteTitle, noteDetails;
+    Spinner spinner;
     Calendar c;
     String todaysDate;
     String currentTime;
+    String s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,30 @@ public class AddNote extends AppCompatActivity {
 
             }
         });
+//      String[] subjects = {"Gia đình,Công việc,Chi tiêu,Tài khoản,Bạn bè"};
+        spinner = findViewById(R.id.spinner);
+        final List<String> spinnerList = new ArrayList<>();
+        spinnerList.add("Gia dinh");
+        spinnerList.add("Cong viec");
+        spinnerList.add("Chi tieu");
+        spinnerList.add("Tai khoan");
+        spinnerList.add("Ban be");
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(getApplicationContext(),spinnerList);
+        spinner.setAdapter(spinnerAdapter);
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                s = spinnerList.get(i);
+                Log.i("MESSAGE",s);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         // set current date and time
         c = Calendar.getInstance();
@@ -83,11 +117,12 @@ public class AddNote extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save) {
             if (noteTitle.getText().length() != 0) {
-                Note note = new Note(noteTitle.getText().toString(), noteDetails.getText().toString(), todaysDate, currentTime);
+                Note note = new Note(noteTitle.getText().toString(), noteDetails.getText().toString(), todaysDate, currentTime,s);
+                Log.i("Add Note"," "+note.toString());
                 SimpleDatabase sDB = new SimpleDatabase(this);
                 long id = sDB.addNote(note);
                 Note check = sDB.getNote(id);
-                Log.d("inserted", "Note: " + id + " -> Title:" + check.getTitle() + " Date: " + check.getDate());
+                Log.d("inserted", "Note: " + id + " -> Title:" + check.getTitle() + " Date: " + check.getCreatedDate());
                 onBackPressed();
 
                 Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();

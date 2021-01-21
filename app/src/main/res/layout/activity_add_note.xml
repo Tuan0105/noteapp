@@ -30,6 +30,42 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    <TextView
+        android:id="@+id/tv_hashtag"
+        app:layout_constraintTop_toBottomOf="@id/noteTitle"
+        android:text="Subject:"
+        android:textSize="19dp"
+        android:layout_marginTop="18dp"
+        android:textColor="#000000"
+        android:paddingLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+    </TextView>
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@id/noteTitle"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#C8C9CB"
+        tools:ignore="MissingConstraints">
+    </android.support.v7.widget.AppCompatSpinner>
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/noteTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/icon_below"
+
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        tools:ignore="MissingConstraints">
+
+    </ImageView>
 
     <EditText
         android:id="@+id/noteDetails"
@@ -50,5 +86,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 </android.support.constraint.ConstraintLayout>

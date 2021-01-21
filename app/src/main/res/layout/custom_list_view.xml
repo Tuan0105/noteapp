@@ -90,6 +90,45 @@
                     app:layout_constraintStart_toEndOf="@+id/nDate"
                     app:layout_constraintTop_toBottomOf="@+id/nTitle" />
 
+
+                <TextView
+                    android:id="@+id/nDateModified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="updated : 7/31/2019"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nDate" />
+
+                <TextView
+                    android:id="@+id/nTimeModified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="08:02"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/nDateModified"
+                    app:layout_constraintTop_toBottomOf="@+id/nTime" />
+                <TextView
+                    android:id="@+id/tv_hashtag"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Gia dinh"
+                    android:background="#ffd664"
+                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/nTitle"
+                    app:layout_constraintLeft_toRightOf="@id/nTime"
+                    tools:ignore="MissingConstraints">
+
+                </TextView>
                 <TextView
                     android:id="@+id/listId"
                     android:layout_width="wrap_content"

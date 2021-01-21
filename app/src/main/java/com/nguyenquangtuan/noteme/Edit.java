@@ -10,20 +10,28 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.nguyenquangtuan.noteme.R;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Edit extends AppCompatActivity {
     Toolbar toolbar;
     EditText nTitle, nContent;
     Calendar c;
+    Spinner spinner;
     String todaysDate;
     String currentTime;
     long nId;
+    String s;
 
 
     @Override
@@ -44,6 +52,7 @@ public class Edit extends AppCompatActivity {
         String content = note.getContent();
         nTitle = findViewById(R.id.noteTitle);
         nContent = findViewById(R.id.noteDetails);
+        String subject = note.getSubject();
         nTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -63,10 +72,39 @@ public class Edit extends AppCompatActivity {
             }
         });
 
-
+//        spinner.se
         nTitle.setText(title);
         nContent.setText(content);
+        spinner = findViewById(R.id.spinner);
+        final List<String> spinnerList = new ArrayList<>();
+        spinnerList.add("Gia dinh");
+        spinnerList.add("Cong viec");
+        spinnerList.add("Chi tieu");
+        spinnerList.add("Tai khoan");
+        spinnerList.add("Ban be");
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(getApplicationContext(),spinnerList);
+        spinner.setAdapter(spinnerAdapter);
+        String s2 = subject.replaceAll("\\s", "");
+        for (int j = 0;j<spinnerList.size();j++){
 
+            String s1 = spinnerList.get(j).replaceAll("\\s", "");
+            if(s1.equals(s2)) {
+                spinner.setSelection(j);
+            }
+        }
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                s = spinnerList.get(i);
+                Log.i("MESSAGE",s);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         // set current date and time
         c = Calendar.getInstance();
         todaysDate = c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH);
@@ -93,9 +131,15 @@ public class Edit extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save) {
-            Note note = new Note(nId, nTitle.getText().toString(), nContent.getText().toString(), todaysDate, currentTime);
-            Log.d("EDITED", "edited: before saving id -> " + note.getId());
+
+
+//            Log.d("EDITED", "edited: before saving id -> " + note.getId());
             SimpleDatabase sDB = new SimpleDatabase(getApplicationContext());
+            Note note1 = sDB.getNote(nId);
+            Log.i("Note1"," "+note1.toString());
+
+            Note note = new Note(nId, nTitle.getText().toString(), nContent.getText().toString(),note1.getCreatedDate(),note1.getCreatedTime(), todaysDate, currentTime,s);
+            Log.i("Note"," "+note.toString());
             long id = sDB.editNote(note);
             Log.d("EDITED", "EDIT: id " + id);
             goToMain();

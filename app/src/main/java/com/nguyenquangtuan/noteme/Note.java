@@ -4,22 +4,37 @@ public class Note {
     private long id;
     private String title;
     private String content;
-    private String date;
-    private String time;
+    private String createdDate;
+    private String createdTime;
+    private String modifiedDate;
+    private String modifiedTime;
+    private String subject;
 
-    Note(String title, String content, String date, String time) {
+    Note(String title, String content, String createdDate, String createdTime,String subject) {
         this.title = title;
         this.content = content;
-        this.date = date;
-        this.time = time;
+        this.createdDate = createdDate;
+        this.createdTime = createdTime;
+        this.subject = subject;
     }
 
-    Note(long id, String title, String content, String date, String time) {
+    Note(long id, String title, String content, String modifiedDate, String modifiedTime) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.date = date;
-        this.time = time;
+        this.modifiedDate = modifiedDate;
+        this.modifiedTime = modifiedTime;
+    }
+
+    public Note(long id, String title, String content, String createdDate, String createdTime, String modifiedDate, String modifiedTime, String subject) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createdDate = createdDate;
+        this.createdTime = createdTime;
+        this.modifiedDate = modifiedDate;
+        this.modifiedTime = modifiedTime;
+        this.subject = subject;
     }
 
     Note() {
@@ -50,19 +65,57 @@ public class Note {
         this.content = content;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getCreatedTime() {
+        return createdTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public String getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(String modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdDate='" + createdDate + '\'' +
+                ", createdTime='" + createdTime + '\'' +
+                ", modifiedDate='" + modifiedDate + '\'' +
+                ", modifiedTime='" + modifiedTime + '\'' +
+                ", subject='" + subject + '\'' +
+                '}';
     }
 }

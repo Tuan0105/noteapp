@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, AddNote.class);
             startActivity(i);
         }
+        if (item.getItemId() == R.id.seach) {
+            Toast.makeText(this, "Searching Note", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, SeachActivity.class);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 
